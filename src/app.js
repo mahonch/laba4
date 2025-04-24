@@ -1,6 +1,7 @@
 import express from 'express';
-
-import userRouter from './resources/users/user.router.js';
+import menuRouter from './resources/menus/menu.router.js';
+import categoryRouter from './resources/categories/category.router.js';
+import dishRouter from './resources/dishes/dish.router.js';
 
 const app = express();
 
@@ -14,6 +15,8 @@ app.use('/', (req, res, next) => {
   next();
 });
 
-app.use('/users', userRouter);
+app.use('/menus', menuRouter);
+app.use('/categories', categoryRouter);
+app.use('/dishes', dishRouter);
 
 export default app;

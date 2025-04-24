@@ -1,4 +1,3 @@
-// resources/categories/category.memory.repository.js
 import Category from './category.model.js';
 
 const categories = [];
@@ -6,6 +5,8 @@ const categories = [];
 const getAll = async () => categories;
 
 const getById = async (id) => categories.find(category => category.id === id);
+
+const getByMenuId = async (menuId) => categories.filter(category => category.menuId === menuId);
 
 const create = async (categoryData) => {
   const category = new Category(categoryData);
@@ -30,4 +31,4 @@ const remove = async (id) => {
   return null;
 };
 
-export { getAll, getById, create, update, remove };
+export { getAll, getById, getByMenuId, create, update, remove };
