@@ -26,10 +26,10 @@ router.route('/').post(async (req, res) => {
   const { categoryId } = req.body;
   const category = await categoriesService.getById(categoryId);
   if (!category) {
-    return res.status(404).json({ error: 'Category not found' });
+    return res.status(404).json({ error: 'Category not found' }); // Явный возврат
   }
   const dish = await dishesService.create({ ...req.body, categoryId });
-  res.status(201).json(Dish.toResponse(dish));
+  return res.status(201).json(Dish.toResponse(dish)); // Явный возврат
 });
 
 // PUT /dishes/:dishId - Обновить блюдо

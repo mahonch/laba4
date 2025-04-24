@@ -15,10 +15,13 @@ const remove = async (id) => {
   if (menu) {
     const categories = await categoriesRepo.getAll();
     const categoriesToRemove = categories.filter(category => category.menuId === id);
-    for (const category of categoriesToRemove) {
-      await categoriesRepo.remove(category.id);
-      await dishesRepo.removeByCategoryId(category.id);
-    }
+    // Используем Promise.all и map вместо цикла for...of
+    await Promise.all(
+      categoriesToRemove.map(async (category) => {
+        await categoriesRepo.remove(category.id);
+        await dishesRepo.removeByCategoryId(category.id);
+      })
+    );
   }
   return menu;
 };
